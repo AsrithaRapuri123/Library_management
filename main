@@ -1,0 +1,44 @@
+from sqlalchemy import create_engine, Column, Integer, String, Date,DateTime
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
+
+URL = 'postgresql+psycopg2://ashu:75693@localhost:54321/library_management'
+
+engine = create_engine(URL)
+Base = declarative_base()
+
+class Librarian(Base):
+    __tablename__ = 'Librarian'
+    id = Column(Integer, primary_key=True)
+    name = Column(String,nullable=False)
+    mail = Column(String,nullable=False,unique=True)
+    ph_no = Column(Integer,nullable=False)  
+    addr = Column(String,nullable=True)
+    role = Column(String,nullable=False)
+    status=Column(String,nullable=True)
+    Date_of_reg=Column(DateTime)
+
+class Book(Base):
+    __tablename__ = 'Books'
+    ISBN = Column(Integer, primary_key=True)
+    title = Column(String ,nullable=False)
+    author = Column(String ,nullable=False)
+
+class Category(Base):
+    __tablename__ = 'Category'
+    category_id = Column(Integer, primary_key=True)  
+    category_name = Column(String)
+    shelf_no = Column(String)
+    quantity = Column(Integer)
+
+class Log_operations(Base):
+    __tablename__ = 'Log_operations'
+    id = Column(Integer, Foreign_key=True)
+    name = Column(String ,nullable=False)
+    borrow_date = Column(Date,nullable=False)
+    return_date=Column(Date,nullable=False) 
+    Time_limit=Column(DateTime,nullable=False)
+
+Base.metadata.create_all(engine)
+Session = sessionmaker(bind=engine)
+session = Session()
