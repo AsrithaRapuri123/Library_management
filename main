@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine, Column, Integer, String, Date,DateTime
+from sqlalchemy import create_engine, Column, Integer, String, Date, DateTime, ForeignKey, PrimaryKeyConstraint
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
@@ -8,37 +8,39 @@ engine = create_engine(URL)
 Base = declarative_base()
 
 class Librarian(Base):
-    __tablename__ = 'Librarian'
+    __tablename__ = 'Librarians'
     id = Column(Integer, primary_key=True)
-    name = Column(String,nullable=False)
-    mail = Column(String,nullable=False,unique=True)
-    ph_no = Column(Integer,nullable=False)  
-    addr = Column(String,nullable=True)
-    role = Column(String,nullable=False)
-    status=Column(String,nullable=True)
-    Date_of_reg=Column(DateTime)
+    name = Column(String, nullable=False)
+    mail = Column(String, nullable=False, unique=True)
+    ph_no = Column(String, nullable=False)  
+    addr = Column(String, nullable=True)
+    role = Column(String, nullable=False)
+    status = Column(String, nullable=True)
+    date_of_reg = Column(DateTime)
 
 class Book(Base):
     __tablename__ = 'Books'
     ISBN = Column(Integer, primary_key=True)
-    title = Column(String ,nullable=False)
-    author = Column(String ,nullable=False)
+    title = Column(String, nullable=False)
+    author = Column(String, nullable=False)
 
 class Category(Base):
-    __tablename__ = 'Category'
+    __tablename__ = 'Categories'
     category_id = Column(Integer, primary_key=True)  
-    category_name = Column(String)
-    shelf_no = Column(String)
-    quantity = Column(Integer)
+    category_name = Column(String, nullable=False)
+    shelf_no = Column(String, nullable=False)
+    quantity = Column(Integer, nullable=False)
 
-class Log_operations(Base):
+class LogOperation(Base):
     __tablename__ = 'Log_operations'
-    id = Column(Integer, Foreign_key=True)
-    name = Column(String ,nullable=False)
-    borrow_date = Column(Date,nullable=False)
-    return_date=Column(Date,nullable=False) 
-    Time_limit=Column(DateTime,nullable=False)
+    log_id = Column(Integer, primary_key=True)
+    librarian_id = Column(Integer, ForeignKey('librarians.id'), nullable=False)
+    name = Column(String, nullable=False)
+    borrow_date = Column(Date, nullable=False)
+    return_date = Column(Date, nullable=False) 
+    time_limit = Column(DateTime, nullable=False)
 
 Base.metadata.create_all(engine)
+
 Session = sessionmaker(bind=engine)
 session = Session()
