@@ -12,7 +12,7 @@ class Librarian(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
     mail = Column(String, nullable=False, unique=True)
-    ph_no = Column(String, nullable=False)  
+    ph_no = Column(Integer, nullable=False)  
     addr = Column(String, nullable=True)
     role = Column(String, nullable=False)
     status = Column(String, nullable=True)
@@ -20,7 +20,7 @@ class Librarian(Base):
 
 class Book(Base):
     __tablename__ = 'Books'
-    ISBN = Column(Integer, primary_key=True)
+    ISBN = Column(String, primary_key=True)
     title = Column(String, nullable=False)
     author = Column(String, nullable=False)
 
@@ -28,7 +28,7 @@ class Category(Base):
     __tablename__ = 'Categories'
     category_id = Column(Integer, primary_key=True)  
     category_name = Column(String, nullable=False)
-    shelf_no = Column(String, nullable=False)
+    shelf_no = Column(Integer, nullable=False)
     quantity = Column(Integer, nullable=False)
 
 class LogOperation(Base):
