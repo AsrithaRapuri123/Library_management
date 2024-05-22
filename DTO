@@ -1,6 +1,7 @@
-  
-from pydantic import BaseModel,model
+from fastapi import FastAPI
+from pydantic import BaseModel
 from datetime import date,datetime
+app=FastAPI()
 class LibrarianDTO(BaseModel):  
     id:int
     name:str
