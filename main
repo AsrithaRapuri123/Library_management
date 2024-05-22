@@ -19,20 +19,20 @@ class Librarian(Base):
     date_of_reg = Column(DateTime)
 
 class Book(Base):
-    __tablename__ = 'Books'
+    __tablename__ = 'Book'
     ISBN = Column(String, primary_key=True)
     title = Column(String, nullable=False)
     author = Column(String, nullable=False)
 
 class Category(Base):
-    __tablename__ = 'Categories'
+    __tablename__ = 'Category'
     category_id = Column(Integer, primary_key=True)  
     category_name = Column(String, nullable=False)
     shelf_no = Column(Integer, nullable=False)
     quantity = Column(Integer, nullable=False)
 
 class Log_operation(Base):
-    __tablename__ = 'Log_operations'
+    __tablename__ = 'Log_operation'
     id= Column(Integer, ForeignKey('librarian.id'), nullable=False)
     name = Column(String, nullable=False)
     borrow_date = Column(Date, nullable=False)
