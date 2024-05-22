@@ -33,7 +33,7 @@ class Category(Base):
 
 class Log_operation(Base):
     __tablename__ = 'Log_operation'
-    id= Column(Integer, ForeignKey('librarian.id'), nullable=False)
+    id= Column(Integer, ForeignKey('Librarian.id'), nullable=False)
     name = Column(String, nullable=False)
     borrow_date = Column(Date, nullable=False)
     return_date = Column(Date, nullable=False) 
