@@ -8,7 +8,7 @@ engine = create_engine(URL)
 Base = declarative_base()
 
 class Librarian(Base):
-    __tablename__ = 'Librarians'
+    __tablename__ = 'Librarian'
     id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
     mail = Column(String, nullable=False, unique=True)
@@ -31,10 +31,9 @@ class Category(Base):
     shelf_no = Column(Integer, nullable=False)
     quantity = Column(Integer, nullable=False)
 
-class LogOperation(Base):
+class Log_operation(Base):
     __tablename__ = 'Log_operations'
-    log_id = Column(Integer, primary_key=True)
-    librarian_id = Column(Integer, ForeignKey('librarians.id'), nullable=False)
+    id= Column(Integer, ForeignKey('librarian.id'), nullable=False)
     name = Column(String, nullable=False)
     borrow_date = Column(Date, nullable=False)
     return_date = Column(Date, nullable=False) 
